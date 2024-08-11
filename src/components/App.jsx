@@ -10,14 +10,24 @@ export default function App() {
   // useEffect(() => {
   //   document.title = `You clicked ${clicks} times`;
   // }, [clicks]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [clicks, setClicks] = useState(() => {
+    const savedClicks = window.localStorage.getItem('saved-clicks');
+    if (savedClicks !== null) {
+      return Number(savedClicks);
+    }
+    return 0;
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem('saved-clicks', clicks);
+  }, [clicks]);
 
   return (
     <div>
-      <button onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? 'Close' : 'Open'}
+      <button onClick={() => setClicks(clicks + 1)}>
+        You clicked {clicks} times
       </button>
-      {isOpen && <Modal />}
+      <button onClick={() => setClicks(0)}>Reset</button>
     </div>
 
     // <div>
