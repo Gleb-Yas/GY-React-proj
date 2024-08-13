@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+nav {
+  border: 2px solid #000;
+  margin: 40px auto;
+}

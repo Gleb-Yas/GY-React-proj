@@ -5,9 +5,10 @@ export const Alert = ({ variant, outlined, elevated, children }) => {
   return (
     <p
       className={clsx(
+        css.alert,
         css[variant],
-        outlined && css.isOutlined,
-        elevated && css.isElevated
+        outlined && css.outlined,
+        elevated && css.elevated
       )}
     >
       {children}
