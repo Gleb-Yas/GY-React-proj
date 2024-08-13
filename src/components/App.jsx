@@ -1,6 +1,7 @@
 import { Alert } from './Alert/Alert';
 import CustomButton from './Button/Button';
-import Modal from './Modal/Modal';
+import FeedbackForm from './FeedbackForm/FeedbackForm';
+import LoginForm from './LoginForm/LoginForm';
 import Product from './Product/Product';
 import { useState, useEffect } from 'react';
 
@@ -24,6 +25,8 @@ export default function App() {
 
   return (
     <div>
+      <LoginForm />
+
       <h1>Best selling</h1>
       <Product
         name="Tacos With Lime"
@@ -56,6 +59,10 @@ export default function App() {
         You clicked {clicks} times
       </button>
       <button onClick={() => setClicks(0)}>Reset</button>
+
+      {/*============================== >Formik< =================================================  */}
+
+      <FeedbackForm />
     </div>
   );
 }
