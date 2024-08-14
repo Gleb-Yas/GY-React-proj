@@ -5,6 +5,9 @@ import LoginForm from './LoginForm/LoginForm';
 import Product from './Product/Product';
 import './App.css';
 import axios from 'axios';
+import Articles from './Articles/Articles';
+import { fetchArticlesWithTopic } from '../articles-api';
+import SearchForm from './Articles/SearchForm/SearchForm';
 
 export default function App() {
   const [clicks, setClicks] = useState(() => {
@@ -24,15 +27,22 @@ export default function App() {
   //!============================================ HTTP запити ============================================
 
   const [articles, setArticles] = useState([]);
-  useEffect(() => {
-    async function fetchArticles() {
-      const response = await axios.get(
-        'https://hn.algolia.com/api/v1/search?query=react'
-      );
-      setArticles(response.data.hits);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleSearch = async topic => {
+    try {
+      setArticles([]);
+      setError(false);
+      setLoading(true);
+      const data = await fetchArticlesWithTopic(topic);
+      setArticles(data);
+    } catch (error) {
+      setError(true);
+    } finally {
+      setLoading(false);
     }
-    fetchArticles();
-  }, []);
+  };
 
   return (
     <div>
@@ -93,22 +103,14 @@ export default function App() {
       {activeTab === 'feedback' && <FeedbackForm />}
 
       {activeTab === 'login' && <LoginForm />}
+
       {activeTab === 'latest articles' && (
         <div>
-          <h1>Latest articles</h1>
-          {articles.length > 0 && (
-            <ul>
-              {articles.map(({ objectID, url, title }) => {
-                return (
-                  <li key={objectID}>
-                    <a href={url} target="_blank" rel="noreferrer noopener">
-                      {title}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+          <h2>Latest articles</h2>
+          <SearchForm onSearch={handleSearch} />
+          {loading && <p>Loading data, please wait...</p>}
+          {error && <p>Whoops, something went wrong!</p>}
+          {articles.length > 0 && <Articles articles={articles} />}
         </div>
       )}
     </div>
