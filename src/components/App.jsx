@@ -4,10 +4,10 @@ import FeedbackForm from './FeedbackForm/FeedbackForm';
 import LoginForm from './LoginForm/LoginForm';
 import Product from './Product/Product';
 import './App.css';
-import axios from 'axios';
 import Articles from './Articles/Articles';
 import { fetchArticlesWithTopic } from '../articles-api';
 import SearchForm from './Articles/SearchForm/SearchForm';
+import Player from './Player/Player';
 
 export default function App() {
   const [clicks, setClicks] = useState(() => {
@@ -53,8 +53,9 @@ export default function App() {
         <button onClick={() => setActiveTab('feedback')}>Feedback</button>
         <button onClick={() => setActiveTab('login')}>Login</button>
         <button onClick={() => setActiveTab('latest articles')}>
-          Latest articles
+          Articles
         </button>
+        <button onClick={() => setActiveTab('player')}>Player</button>
       </nav>
 
       {activeTab === 'home' && (
@@ -112,6 +113,9 @@ export default function App() {
           {error && <p>Whoops, something went wrong!</p>}
           {articles.length > 0 && <Articles articles={articles} />}
         </div>
+      )}
+      {activeTab === 'player' && (
+        <Player source="http://media.w3.org/2010/05/sintel/trailer.mp4" />
       )}
     </div>
   );
