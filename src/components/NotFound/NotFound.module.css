@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #708090; /* Slate Gray background */
+  color: #0abab5; /* Tiffany Blue text */
+  text-align: center;
+}
+
+.title {
+  font-size: 8rem;
+  font-weight: bold;
+}
+
+.message {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.homeButtonContainer {
+  margin-top: 2rem;
+}
+
+.homeButton {
+  padding: 0.6em 1.2em;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #0abab5; /* Tiffany Blue */
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.25s;
+}
+
+.homeButton:hover {
+  background-color: #079c91; /* Darker Tiffany Blue on hover */
+}

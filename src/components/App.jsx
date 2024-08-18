@@ -8,7 +8,8 @@ import Articles from './Articles/Articles';
 import { fetchArticlesWithTopic } from '../articles-api';
 import SearchForm from './Articles/SearchForm/SearchForm';
 import Player from './Player/Player';
-import { Link, Route, Routes } from 'react-router-dom';
+import { NavLink, Route, Routes } from 'react-router-dom';
+import NotFound from './NotFound/NotFound';
 
 export default function App() {
   const [clicks, setClicks] = useState(() => {
@@ -46,13 +47,13 @@ export default function App() {
   return (
     <div>
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/products">Products</Link>
-        <Link to="/alerts">Alerts</Link>
-        <Link to="/feedback">Feedback</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/articles">Articles</Link>
-        <Link to="/player">Player</Link>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/products">Products</NavLink>
+        <NavLink to="/alerts">Alerts</NavLink>
+        <NavLink to="/feedback">Feedback</NavLink>
+        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/articles">Articles</NavLink>
+        <NavLink to="/player">Player</NavLink>
       </nav>
       <Routes>
         <Route
@@ -70,19 +71,46 @@ export default function App() {
         <Route
           path="/products"
           element={
-            <div>
+            <>
               <h1>Best selling</h1>
-              <Product
-                name="Tacos With Lime"
-                imgUrl="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?dpr=2&h=480&w=640"
-                price={10.99}
-              />
-              <Product
-                name="Fries and Burger"
-                imgUrl="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?dpr=2&h=480&w=640"
-                price={14.29}
-              />
-            </div>
+              <div id="products">
+                <Product
+                  name="Tacos With Lime"
+                  imgUrl="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?dpr=2&h=480&w=640"
+                  price={10.99}
+                />
+                <Product
+                  name="Fries and Burger"
+                  imgUrl="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?dpr=2&h=480&w=640"
+                  price={14.29}
+                />
+                <Product
+                  name="Pasta Alfredo"
+                  imgUrl="https://images.pexels.com/photos/277253/pexels-photo-277253.jpeg?dpr=2&h=480&w=640"
+                  price={12.99}
+                />
+                <Product
+                  name="Grilled Chicken"
+                  imgUrl="https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg?dpr=2&h=480&w=640"
+                  price={15.49}
+                />
+                <Product
+                  name="Sushi Platter"
+                  imgUrl="https://images.pexels.com/photos/3577563/pexels-photo-3577563.jpeg?dpr=2&h=480&w=640"
+                  price={22.99}
+                />
+                <Product
+                  name="Caesar Salad"
+                  imgUrl="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?dpr=2&h=480&w=640"
+                  price={9.49}
+                />
+                <Product
+                  name="Ice Cream Sundae"
+                  imgUrl="https://images.pexels.com/photos/458654/pexels-photo-458654.jpeg?dpr=2&h=480&w=640"
+                  price={6.99}
+                />
+              </div>
+            </>
           }
         />
         <Route
@@ -124,6 +152,7 @@ export default function App() {
             <Player source="http://media.w3.org/2010/05/sintel/trailer.mp4" />
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
